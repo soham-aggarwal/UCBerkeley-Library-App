@@ -13,6 +13,7 @@
 		B29900081EA064A300321B29 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B29900061EA064A300321B29 /* LaunchScreen.storyboard */; };
 		B29900131EA064A300321B29 /* studyBuddyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B29900121EA064A300321B29 /* studyBuddyTests.swift */; };
 		B299001E1EA064A300321B29 /* studyBuddyUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B299001D1EA064A300321B29 /* studyBuddyUITests.swift */; };
+		B299002D1EA0677500321B29 /* Users.swift in Sources */ = {isa = PBXBuildFile; fileRef = B299002C1EA0677500321B29 /* Users.swift */; };
 		B299FFFE1EA064A300321B29 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B299FFFD1EA064A300321B29 /* AppDelegate.swift */; };
 /* End PBXBuildFile section */
 
@@ -44,6 +45,7 @@
 		B29900191EA064A300321B29 /* studyBuddyUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = studyBuddyUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B299001D1EA064A300321B29 /* studyBuddyUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = studyBuddyUITests.swift; sourceTree = "<group>"; };
 		B299001F1EA064A300321B29 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B299002C1EA0677500321B29 /* Users.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Users.swift; sourceTree = "<group>"; };
 		B299FFFA1EA064A300321B29 /* studyBuddy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = studyBuddy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B299FFFD1EA064A300321B29 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B299FFFF1EA064A300321B29 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -92,6 +94,14 @@
 			path = studyBuddyUITests;
 			sourceTree = "<group>";
 		};
+		B299002B1EA0674100321B29 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				B299002C1EA0677500321B29 /* Users.swift */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
 		B299FFF11EA064A200321B29 = {
 			isa = PBXGroup;
 			children = (
@@ -116,6 +126,7 @@
 			isa = PBXGroup;
 			children = (
 				B299FFFD1EA064A300321B29 /* AppDelegate.swift */,
+				B299002B1EA0674100321B29 /* Models */,
 				B299FFFF1EA064A300321B29 /* ViewController.swift */,
 				B29900011EA064A300321B29 /* Main.storyboard */,
 				B29900041EA064A300321B29 /* Assets.xcassets */,
@@ -277,6 +288,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B29900001EA064A300321B29 /* ViewController.swift in Sources */,
+				B299002D1EA0677500321B29 /* Users.swift in Sources */,
 				B299FFFE1EA064A300321B29 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
