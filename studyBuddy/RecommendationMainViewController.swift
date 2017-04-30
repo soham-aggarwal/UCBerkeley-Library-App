@@ -7,14 +7,18 @@
 //
 
 import UIKit
+import SwiftyJSON
+import Alamofire
 
-class RecommendationMainViewController: UIViewController {
+
+class RecommendationMainViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
     @IBOutlet weak var LibraryTableView: UITableView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        LibraryTableView.dataSource = self;
+        LibraryTableView.delegate = self;
     }
 
     override func didReceiveMemoryWarning() {
@@ -22,6 +26,47 @@ class RecommendationMainViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
+        var retVal = 1;
+        
+        Alamofire.request("https://library-adhyyan.herokuapp.com/api/libraries", method: .get).validate().responseJSON { response in
+            switch response.result {
+            case .success(let value):
+                let json = JSON(value)
+                retVal = json.count
+            case .failure(let error):
+                print(error)
+            }
+        }
+        return retVal;
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "libraryCell", for: indexPath) as! RecommendationTableViewCell
+        Alamofire.request("https://library-adhyyan.herokuapp.com/api/libraries", method: .get).validate().responseJSON { response in
+            switch response.result {
+            case .success(let value):
+                let json = JSON(value)
+                let path: [JSONSubscriptType] = [indexPath.item, "name"]
+                cell.libraryLabel.text = json[path].stringValue
+            case .failure(let error):
+                print(error)
+            }
+        }
+        return cell;
+    }
+    
+    /*
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+    }
+    */
 
     /*
     // MARK: - Navigation
