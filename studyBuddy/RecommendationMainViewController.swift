@@ -12,8 +12,11 @@ import Alamofire
 
 
 class RecommendationMainViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
-
+    
     @IBOutlet weak var LibraryTableView: UITableView!
+    var retVal: Int?
+    var selectedIndexPath: IndexPath?
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,18 +32,19 @@ class RecommendationMainViewController: UIViewController, UITableViewDataSource,
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        var retVal = 1;
+        var size: Int = 2;
         
         Alamofire.request("https://library-adhyyan.herokuapp.com/api/libraries", method: .get).validate().responseJSON { response in
             switch response.result {
             case .success(let value):
                 let json = JSON(value)
-                retVal = json.count
+                size = json.arrayValue.count
+                self.retVal = json.arrayValue.count
             case .failure(let error):
                 print(error)
             }
         }
-        return retVal;
+        return size
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -58,15 +62,36 @@ class RecommendationMainViewController: UIViewController, UITableViewDataSource,
         return cell;
     }
     
-    /*
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
+        selectedIndexPath = indexPath
+        performSegue(withIdentifier: "recommendationToInfo", sender: self)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
-    }
-    */
+        if segue.identifier == "recommendationToInfo" {
+            if let destinationVC = segue.destination as? LibraryInfoViewController {
+                Alamofire.request("https://library-adhyyan.herokuapp.com/api/libraries", method: .get).validate().responseJSON { response in
+                    switch response.result {
+                    case .success(let value):
+                        let json = JSON(value)
+                        let namePath: [JSONSubscriptType] = [self.selectedIndexPath!.item, "name"]
+                        let descriptionPath:  [JSONSubscriptType] = [self.selectedIndexPath!.item, "description"]
+                        let imagePath:[JSONSubscriptType] = [self.selectedIndexPath!.item, "image_url"]
+                        destinationVC.nameLabel.text = json[namePath].stringValue
+                        destinationVC.descriptionLabel.text = json[descriptionPath].stringValue
+                        if let url = NSURL(string: json[imagePath].stringValue) {
+                            if let data = NSData(contentsOf: url as URL) {
+                                destinationVC.libraryImage.image = UIImage(data: data as Data)
+                            }
+                        }
+                    case .failure(let error):
+                        print(error)
+                    }
+                }
+            }
+        }
+    
 
     /*
     // MARK: - Navigation
@@ -78,4 +103,5 @@ class RecommendationMainViewController: UIViewController, UITableViewDataSource,
     }
     */
 
+}
 }

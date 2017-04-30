@@ -303,11 +303,55 @@
                     <tabBarItem key="tabBarItem" title="Recommendation" id="7xe-fN-SKB"/>
                     <connections>
                         <outlet property="LibraryTableView" destination="qrM-ef-D7U" id="4ei-bR-X2A"/>
+                        <segue destination="TWv-TA-r5v" kind="show" identifier="recommendationToInfo" id="hxe-Xj-cN4"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iD8-mE-McB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1212" y="421.43928035982015"/>
+        </scene>
+        <!--Library Info View Controller-->
+        <scene sceneID="3jx-Sl-PJ6">
+            <objects>
+                <viewController id="TWv-TA-r5v" customClass="LibraryInfoViewController" customModule="studyBuddy" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="rbE-1j-Ml6"/>
+                        <viewControllerLayoutGuide type="bottom" id="KZT-28-CRQ"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="n8o-se-cPD">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="DrD-qu-FUi">
+                                <rect key="frame" x="67" y="146" width="240" height="128"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ycc-id-VPr">
+                                <rect key="frame" x="166" y="81" width="42" height="57"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fdt-We-LfA">
+                                <rect key="frame" x="166" y="323" width="42" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <connections>
+                        <outlet property="descriptionLabel" destination="Fdt-We-LfA" id="5kA-tw-fdt"/>
+                        <outlet property="libraryImage" destination="DrD-qu-FUi" id="myu-f4-kXj"/>
+                        <outlet property="nameLabel" destination="ycc-id-VPr" id="Gzl-iw-IBA"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="oWH-Vj-hf6" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2004" y="409.7451274362819"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="yGW-eS-713">

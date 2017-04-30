@@ -10,6 +10,7 @@ import UIKit
 
 class LibraryInfoViewController: UIViewController {
 
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -31,5 +32,9 @@ class LibraryInfoViewController: UIViewController {
         // Pass the selected object to the new view controller.
     }
     */
+    @IBOutlet weak var nameLabel: UILabel!
 
+    @IBOutlet weak var descriptionLabel: UILabel!
+    
+    @IBOutlet weak var libraryImage: UIImageView!
 }
