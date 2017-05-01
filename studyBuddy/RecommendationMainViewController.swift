@@ -16,12 +16,26 @@ class RecommendationMainViewController: UIViewController, UITableViewDataSource,
     @IBOutlet weak var LibraryTableView: UITableView!
     var retVal: Int?
     var selectedIndexPath: IndexPath?
-    
+    var names: [String] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
         LibraryTableView.dataSource = self;
         LibraryTableView.delegate = self;
+        Alamofire.request("https://library-adhyyan.herokuapp.com/api/libraries", method: .get).validate().responseJSON { response in
+            switch response.result {
+            case .success(let value):
+                let json = JSON(value)
+                let number = json.arrayValue.count
+                for i in 0...number {
+                    let path: [JSONSubscriptType] = [i, "name"]
+                    self.names.append(json[path].stringValue)
+                }
+                self.LibraryTableView.reloadData()
+            case .failure(let error):
+                print(error)
+            }
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -31,34 +45,12 @@ class RecommendationMainViewController: UIViewController, UITableViewDataSource,
     
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
-        var size: Int = 2;
-        
-        Alamofire.request("https://library-adhyyan.herokuapp.com/api/libraries", method: .get).validate().responseJSON { response in
-            switch response.result {
-            case .success(let value):
-                let json = JSON(value)
-                size = json.arrayValue.count
-                self.retVal = json.arrayValue.count
-            case .failure(let error):
-                print(error)
-            }
-        }
-        return size
+        return names.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "libraryCell", for: indexPath) as! RecommendationTableViewCell
-        Alamofire.request("https://library-adhyyan.herokuapp.com/api/libraries", method: .get).validate().responseJSON { response in
-            switch response.result {
-            case .success(let value):
-                let json = JSON(value)
-                let path: [JSONSubscriptType] = [indexPath.item, "name"]
-                cell.libraryLabel.text = json[path].stringValue
-            case .failure(let error):
-                print(error)
-            }
-        }
+        cell.libraryLabel.text = names[indexPath.item]
         return cell;
     }
     
