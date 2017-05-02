@@ -106,34 +106,50 @@ class LibrariesModel: NSObject {
             }
         }
     }
-    
-    func getDistances(i: Int) -> Void {
+
+    func getDistances() -> Void {
         //manager.delegate = self.manager
-        if (!CLLocationManager.locationServicesEnabled())
-        {
-            //ask for user’s location
-            manager.requestAlwaysAuthorization()
-            manager.startUpdatingLocation()
-            let mylocation = manager.location
-            let libLat = allLibraryOptions[i].latitude //Get value of lat
-            let libLon = allLibraryOptions[i].longitude  //Get value of lon
-            var dLati = 0.0
-            var dLong = 0.0
-            if let lat = libLat {
-                 dLati = (lat as NSString).doubleValue
+        if (!CLLocationManager.locationServicesEnabled()) {
+            let alertController = UIAlertController(
+                title: "Background Location Access Disabled",
+                message: "In order to ____, please open Settings and set location access for this app to When in Use",
+                preferredStyle: .alert)
+            let openAction = UIAlertAction(title: "Open Settings",
+                                           style: .default) { (action) in
+                                            if let url = NSURL(string: UIApplicationOpenSettingsURLString) {
+                                                UIApplication.shared.open(url as URL,
+                                                                          options: [:],
+                                                                          completionHandler: nil)
+                                            }
             }
-            if let lon = libLon{
-                 dLong = (lon as NSString).doubleValue
-            }
-            let libLocation = (CLLocation).init(latitude: dLati, longitude: dLong)
-            let distance = mylocation?.distance(from: libLocation)
-            allLibraryOptions[i].distance = distance
-        }
-        if (i < (allLibraryOptions.count - 1)) {
-            
+            alertController.addAction(openAction)
+            let cancelAction = UIAlertAction(title: "Cancel",
+                                             style: .ctancel,
+                                             handler: nil)
+            alertController.addAction(cancelAction)
+            self.present(alertController,
+                         animated: true,
+                         completion: nil)
         } else {
-            getOpenAndPercentage()
+            for i in 0..<self.allLibraryOptions.count {
+                let mylocation = manager.location
+                let libLat = allLibraryOptions[i].latitude //Get value of lat
+                let libLon = allLibraryOptions[i].longitude  //Get value of lon
+                var dLati = 0.0
+                var dLong = 0.0
+                if let lat = libLat {
+                    dLati = (lat as NSString).doubleValue
+                }
+                if let lon = libLon{
+                    dLong = (lon as NSString).doubleValue
+                }
+                let libLocation = (CLLocation).init(latitude: dLati, longitude: dLong)
+                let distance = mylocation?.distance(from: libLocation)
+                allLibraryOptions[i].distance = distance
+            }
+            
         }
+        
     }
     
     func recommendThree() -> [Library] {
