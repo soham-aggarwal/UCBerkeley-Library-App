@@ -7,6 +7,7 @@
 
 import UIKit
 import Foundation
+import Alamofire
 
 class PreferencesViewController: UIViewController {
     
@@ -44,12 +45,14 @@ class PreferencesViewController: UIViewController {
             "mlku": mlku.text ?? ""
         ]
         
-        Alamofire.request(.PUT, "https://library-adhyyan.herokuapp.com/api/users/put", parameters:parameters)
-            .response { (request, response, data, error) in
-                println(request)
-                println(response)
-                println(error)
+        Alamofire.request("https://library-adhyyan.herokuapp.com/api/users", method: .put, parameters: ["preferences": parameters], encoding: JSONEncoding.default, headers: nil)
+            .responseJSON { response in
+                print(response.request as Any)  // original URL request
+                print(response.response as Any) // URL response
+                print(response.result.value as Any)   // result of response serialization
         }
+            self.performSegue(withIdentifier:"toRecommendation", sender: self)
+    
     }
     
     
