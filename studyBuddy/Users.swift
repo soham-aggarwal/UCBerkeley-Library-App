@@ -14,6 +14,7 @@ import SwiftyJSON
 class User {
     
     var json: JSON?
+    var token: String?
     
     func getLibrarySize() -> JSON {
         DispatchQueue.main.sync {
@@ -28,5 +29,9 @@ class User {
         }
         return json!
     }
+    
+    
+    
+    
     
 }
