@@ -19,6 +19,7 @@
 		B22562B21EB6AD590029CAE9 /* LibraryInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B22562B11EB6AD590029CAE9 /* LibraryInfoViewController.swift */; };
 		B22562B41EB88E3D0029CAE9 /* KeychainService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B22562B31EB88E3D0029CAE9 /* KeychainService.swift */; };
 		B252490E1EB8DB60000AECB7 /* PreferencesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B252490D1EB8DB60000AECB7 /* PreferencesViewController.swift */; };
+		B25249101EB8DC77000AECB7 /* GlobalVar.swift in Sources */ = {isa = PBXBuildFile; fileRef = B252490F1EB8DC77000AECB7 /* GlobalVar.swift */; };
 		B29900031EA064A300321B29 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B29900011EA064A300321B29 /* Main.storyboard */; };
 		B29900051EA064A300321B29 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B29900041EA064A300321B29 /* Assets.xcassets */; };
 		B29900081EA064A300321B29 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B29900061EA064A300321B29 /* LaunchScreen.storyboard */; };
@@ -65,6 +66,7 @@
 		B22562B11EB6AD590029CAE9 /* LibraryInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LibraryInfoViewController.swift; sourceTree = "<group>"; };
 		B22562B31EB88E3D0029CAE9 /* KeychainService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeychainService.swift; sourceTree = "<group>"; };
 		B252490D1EB8DB60000AECB7 /* PreferencesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreferencesViewController.swift; sourceTree = "<group>"; };
+		B252490F1EB8DC77000AECB7 /* GlobalVar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GlobalVar.swift; sourceTree = "<group>"; };
 		B29900021EA064A300321B29 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		B29900041EA064A300321B29 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B29900071EA064A300321B29 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -226,6 +228,7 @@
 				B29900041EA064A300321B29 /* Assets.xcassets */,
 				B29900061EA064A300321B29 /* LaunchScreen.storyboard */,
 				B29900091EA064A300321B29 /* Info.plist */,
+				B252490F1EB8DC77000AECB7 /* GlobalVar.swift */,
 			);
 			path = studyBuddy;
 			sourceTree = "<group>";
@@ -532,6 +535,7 @@
 				B22562A21EB5DD600029CAE9 /* SignupViewController.swift in Sources */,
 				B22562AC1EB5DE3D0029CAE9 /* TrendCollectionViewCell.swift in Sources */,
 				B299002D1EA0677500321B29 /* Users.swift in Sources */,
+				B25249101EB8DC77000AECB7 /* GlobalVar.swift in Sources */,
 				B22562A41EB5DD800029CAE9 /* TrendsMainViewController.swift in Sources */,
 				B22562B21EB6AD590029CAE9 /* LibraryInfoViewController.swift in Sources */,
 				B22562B41EB88E3D0029CAE9 /* KeychainService.swift in Sources */,
