@@ -71,7 +71,6 @@
                                         </state>
                                         <connections>
                                             <action selector="signUpButton:" destination="wli-p1-ZP5" eventType="touchUpInside" id="JsL-F7-7FA"/>
-                                            <segue destination="Z6C-Mh-JCz" kind="show" identifier="toPreferences" action="showDetailViewController:sender:" id="EXe-0J-M7T"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fVP-OV-3uY">
@@ -108,6 +107,7 @@
                         <outlet property="name" destination="sHN-jl-Qs8" id="aCI-QH-goh"/>
                         <outlet property="password" destination="41I-SD-0e0" id="YbI-3n-B46"/>
                         <outlet property="username" destination="ATF-k6-ExB" id="nTw-cB-1jb"/>
+                        <segue destination="Z6C-Mh-JCz" kind="show" identifier="toPreferences" id="fkn-YP-ngt"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wHV-ev-Bhm" userLabel="First Responder" sceneMemberID="firstResponder"/>
