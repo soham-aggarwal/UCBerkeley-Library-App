@@ -17,6 +17,7 @@
 		B22562AC1EB5DE3D0029CAE9 /* TrendCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B22562AB1EB5DE3D0029CAE9 /* TrendCollectionViewCell.swift */; };
 		B22562AE1EB5DE5A0029CAE9 /* RecommendationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B22562AD1EB5DE5A0029CAE9 /* RecommendationTableViewCell.swift */; };
 		B22562B21EB6AD590029CAE9 /* LibraryInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B22562B11EB6AD590029CAE9 /* LibraryInfoViewController.swift */; };
+		B22562B41EB88E3D0029CAE9 /* KeychainService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B22562B31EB88E3D0029CAE9 /* KeychainService.swift */; };
 		B29900001EA064A300321B29 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B299FFFF1EA064A300321B29 /* ViewController.swift */; };
 		B29900031EA064A300321B29 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B29900011EA064A300321B29 /* Main.storyboard */; };
 		B29900051EA064A300321B29 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B29900041EA064A300321B29 /* Assets.xcassets */; };
@@ -62,6 +63,7 @@
 		B22562AB1EB5DE3D0029CAE9 /* TrendCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrendCollectionViewCell.swift; sourceTree = "<group>"; };
 		B22562AD1EB5DE5A0029CAE9 /* RecommendationTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecommendationTableViewCell.swift; sourceTree = "<group>"; };
 		B22562B11EB6AD590029CAE9 /* LibraryInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LibraryInfoViewController.swift; sourceTree = "<group>"; };
+		B22562B31EB88E3D0029CAE9 /* KeychainService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeychainService.swift; sourceTree = "<group>"; };
 		B29900021EA064A300321B29 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		B29900041EA064A300321B29 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B29900071EA064A300321B29 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -147,6 +149,7 @@
 			children = (
 				B225629F1EB5DD4F0029CAE9 /* LoginViewController.swift */,
 				B22562A11EB5DD600029CAE9 /* SignupViewController.swift */,
+				B22562B31EB88E3D0029CAE9 /* KeychainService.swift */,
 			);
 			name = Auth;
 			sourceTree = "<group>";
@@ -532,6 +535,7 @@
 				B299002D1EA0677500321B29 /* Users.swift in Sources */,
 				B22562A41EB5DD800029CAE9 /* TrendsMainViewController.swift in Sources */,
 				B22562B21EB6AD590029CAE9 /* LibraryInfoViewController.swift in Sources */,
+				B22562B41EB88E3D0029CAE9 /* KeychainService.swift in Sources */,
 				B225629C1EB5DCE00029CAE9 /* RecommendationMainViewController.swift in Sources */,
 				B22562AE1EB5DE5A0029CAE9 /* RecommendationTableViewCell.swift in Sources */,
 				B22562AA1EB5DE0E0029CAE9 /* Libraries.swift in Sources */,
