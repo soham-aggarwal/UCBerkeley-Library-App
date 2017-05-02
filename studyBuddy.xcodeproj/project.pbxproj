@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0FD234A61EB8ADC80052AA0F /* PreferencesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FD234A51EB8ADC80052AA0F /* PreferencesViewController.swift */; };
 		57A770C726B0BA8CB2F4E288 /* Pods_studyBuddy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83F11CE3ED176FD3E38964AC /* Pods_studyBuddy.framework */; };
 		B225629C1EB5DCE00029CAE9 /* RecommendationMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B225629B1EB5DCE00029CAE9 /* RecommendationMainViewController.swift */; };
 		B22562A01EB5DD4F0029CAE9 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B225629F1EB5DD4F0029CAE9 /* LoginViewController.swift */; };
@@ -18,7 +19,6 @@
 		B22562AE1EB5DE5A0029CAE9 /* RecommendationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B22562AD1EB5DE5A0029CAE9 /* RecommendationTableViewCell.swift */; };
 		B22562B21EB6AD590029CAE9 /* LibraryInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B22562B11EB6AD590029CAE9 /* LibraryInfoViewController.swift */; };
 		B22562B41EB88E3D0029CAE9 /* KeychainService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B22562B31EB88E3D0029CAE9 /* KeychainService.swift */; };
-		B29900001EA064A300321B29 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B299FFFF1EA064A300321B29 /* ViewController.swift */; };
 		B29900031EA064A300321B29 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B29900011EA064A300321B29 /* Main.storyboard */; };
 		B29900051EA064A300321B29 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B29900041EA064A300321B29 /* Assets.xcassets */; };
 		B29900081EA064A300321B29 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B29900061EA064A300321B29 /* LaunchScreen.storyboard */; };
@@ -50,6 +50,7 @@
 /* Begin PBXFileReference section */
 		0708379553D1848D8874E65B /* Pods-studyBuddyTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-studyBuddyTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-studyBuddyTests/Pods-studyBuddyTests.debug.xcconfig"; sourceTree = "<group>"; };
 		0BDA81A61615C79DC3CD4234 /* Pods_studyBuddyUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_studyBuddyUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		0FD234A51EB8ADC80052AA0F /* PreferencesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PreferencesViewController.swift; path = ../../../.Trash/PreferencesViewController.swift; sourceTree = "<group>"; };
 		66D00FEE99CE1F4CAD344A82 /* Pods-studyBuddy.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-studyBuddy.release.xcconfig"; path = "Pods/Target Support Files/Pods-studyBuddy/Pods-studyBuddy.release.xcconfig"; sourceTree = "<group>"; };
 		696C1C5A8C6F2BAC6D676F13 /* Pods-studyBuddyTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-studyBuddyTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-studyBuddyTests/Pods-studyBuddyTests.release.xcconfig"; sourceTree = "<group>"; };
 		83F11CE3ED176FD3E38964AC /* Pods_studyBuddy.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_studyBuddy.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -77,7 +78,6 @@
 		B299002C1EA0677500321B29 /* Users.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Users.swift; sourceTree = "<group>"; };
 		B299FFFA1EA064A300321B29 /* studyBuddy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = studyBuddy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B299FFFD1EA064A300321B29 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		B299FFFF1EA064A300321B29 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		C63BE99455E85BE70930B3D9 /* Pods-studyBuddyUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-studyBuddyUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-studyBuddyUITests/Pods-studyBuddyUITests.release.xcconfig"; sourceTree = "<group>"; };
 		C8CB05CA585F7C8DB319D8DF /* Pods_studyBuddyTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_studyBuddyTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E5582A3900F31EBEEEB60CFD /* Pods-studyBuddyUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-studyBuddyUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-studyBuddyUITests/Pods-studyBuddyUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -150,6 +150,7 @@
 				B225629F1EB5DD4F0029CAE9 /* LoginViewController.swift */,
 				B22562A11EB5DD600029CAE9 /* SignupViewController.swift */,
 				B22562B31EB88E3D0029CAE9 /* KeychainService.swift */,
+				0FD234A51EB8ADC80052AA0F /* PreferencesViewController.swift */,
 			);
 			name = Auth;
 			sourceTree = "<group>";
@@ -221,7 +222,6 @@
 				B22562991EB5DCBA0029CAE9 /* Auth */,
 				B22562981EB5DCB30029CAE9 /* Recommendation */,
 				B299002B1EA0674100321B29 /* Models */,
-				B299FFFF1EA064A300321B29 /* ViewController.swift */,
 				B29900011EA064A300321B29 /* Main.storyboard */,
 				B29900041EA064A300321B29 /* Assets.xcassets */,
 				B29900061EA064A300321B29 /* LaunchScreen.storyboard */,
@@ -531,12 +531,12 @@
 				B22562A01EB5DD4F0029CAE9 /* LoginViewController.swift in Sources */,
 				B22562A21EB5DD600029CAE9 /* SignupViewController.swift in Sources */,
 				B22562AC1EB5DE3D0029CAE9 /* TrendCollectionViewCell.swift in Sources */,
-				B29900001EA064A300321B29 /* ViewController.swift in Sources */,
 				B299002D1EA0677500321B29 /* Users.swift in Sources */,
 				B22562A41EB5DD800029CAE9 /* TrendsMainViewController.swift in Sources */,
 				B22562B21EB6AD590029CAE9 /* LibraryInfoViewController.swift in Sources */,
 				B22562B41EB88E3D0029CAE9 /* KeychainService.swift in Sources */,
 				B225629C1EB5DCE00029CAE9 /* RecommendationMainViewController.swift in Sources */,
+				0FD234A61EB8ADC80052AA0F /* PreferencesViewController.swift in Sources */,
 				B22562AE1EB5DE5A0029CAE9 /* RecommendationTableViewCell.swift in Sources */,
 				B22562AA1EB5DE0E0029CAE9 /* Libraries.swift in Sources */,
 				B22562A61EB5DD900029CAE9 /* GraphsViewController.swift in Sources */,
