@@ -8,41 +8,50 @@
 import Foundation
 import Alamofire
 import SwiftyJSON
+import CoreLocation
 
-class LibrariesModel {
+class LibrariesModel: NSObject {
     
     struct Library {
         var name: String?
+        var index: Int?
         var preference: Int?
         var open: Bool?
+        var latitude: String?
+        var longitude: String?
         var distance: Double?
         var percentageFull: Int?
         var totalScore: Int?
         
         
-        init(name:String) {
+        init(name:String, index: Int) {
             self.name = name
+            self.index = index
         }
     }
     
     var allLibraryOptions: [Library] = []
     var bestThree: [Library] = []
+    let manager = CLLocationManager()
+
     
     //Now we need to fill up the allLibraryOptions variable.
     
     /* Make the API call to my API to get the names inside the initializer. Then inside the completion handler, call my API to getPreferences(). Then, inside the completion handler, make a function call to getDistance(). Inside the completion handler for getDistance(), make a function call to getPercentage(). Now all the information has been obtained and I can safely perform my algorithm.
      */
     
-    init() {
+    override init() {
         Alamofire.request("https://library-adhyyan.herokuapp.com/api/libraries", method: .get).validate().responseJSON { response in
             switch response.result {
             case .success(let value):
                 let json = JSON(value)
                 let number = json.arrayValue.count
                 for i in 0...number {
-                    let path: [JSONSubscriptType] = [i, "name"]
+                    let namePath: [JSONSubscriptType] = [i, "name"]
+                    let indexPath: [JSONSubscriptType] = [i, "index"]
                     let libraryOptionName = Library(
-                        name: json[path].stringValue
+                        name: json[namePath].stringValue,
+                        index: json[indexPath].intValue
                     )
                     self.allLibraryOptions.append(libraryOptionName)
                 }
@@ -73,11 +82,57 @@ class LibrariesModel {
         }
     }
     
+
+    
+    func getOpenAndPercentage(){
+        Alamofire.request("https://api.packd.org/locations/", method: .get).validate().responseJSON { response in
+            switch response.result {
+            case .success(let value):
+                let json = JSON(value)
+                for i in 0..<self.allLibraryOptions.count {
+                    let library: Library = self.allLibraryOptions[i]
+                    let openPath: [JSONSubscriptType] = [library.index!, "is_open"]
+                    let percentagePath: [JSONSubscriptType] = [library.index!, "current_percent"]
+                    let latitudePath: [JSONSubscriptType] = [library.index!, "lat"]
+                    let longituePath: [JSONSubscriptType] = [library.index!, "lon"]
+                    self.allLibraryOptions[i].open = json[openPath].boolValue
+                    self.allLibraryOptions[i].percentageFull = json[percentagePath].intValue
+                    self.allLibraryOptions[i].latitude = json[openPath].stringValue
+                    self.allLibraryOptions[i].longitude = json[percentagePath].stringValue
+                }
+                self.getDistances()
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
+    
     func getDistances(i: Int) -> Void {
-        if (i < allLibraryOptions.count - 1) {
+        //manager.delegate = self.manager
+        if (!CLLocationManager.locationServicesEnabled())
+        {
+            //ask for user’s location
+            manager.requestAlwaysAuthorization()
+            manager.startUpdatingLocation()
+            let mylocation = manager.location
+            let libLat = allLibraryOptions[i].latitude //Get value of lat
+            let libLon = allLibraryOptions[i].longitude  //Get value of lon
+            var dLati = 0.0
+            var dLong = 0.0
+            if let lat = libLat {
+                 dLati = (lat as NSString).doubleValue
+            }
+            if let lon = libLon{
+                 dLong = (lon as NSString).doubleValue
+            }
+            let libLocation = (CLLocation).init(latitude: dLati, longitude: dLong)
+            let distance = mylocation?.distance(from: libLocation)
+            allLibraryOptions[i].distance = distance
+        }
+        if (i < (allLibraryOptions.count - 1)) {
             
         } else {
-            getOpen()
+            getOpenAndPercentage()
         }
     }
     
@@ -92,8 +147,9 @@ class LibrariesModel {
         //Then scale the distances to 10
         let max: Double = findmax()
         let scalingFactor = 10/max
-        for var library in finalOptions {
-            library.distance = library.distance! * scalingFactor
+        for i in 0...(finalOptions.count - 1) {
+            let library: Library = finalOptions[i]
+            finalOptions[i].distance = library.distance! * scalingFactor
         }
         //Then put values into totalscore based on these two rankings.
         for var library in finalOptions {
@@ -123,7 +179,6 @@ class LibrariesModel {
                 bestThree[0] = library
             }
         }
-        return bestThree
 }
     
     
