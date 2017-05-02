@@ -73,9 +73,9 @@ class LibrariesModel: NSObject {
                     let path: [JSONSubscriptType] = ["preferences", self.allLibraryOptions[i].name!]
                     let prefNumber = json[path].intValue
                     self.allLibraryOptions[i].preference = prefNumber
-                    self.getDistances(i: 0)
+                    
                 }
-                self.getPreferences()
+                self.getDistances()
             case .failure(let error):
                 print(error)
             }
