@@ -165,6 +165,9 @@ class LibrariesModel: NSObject, CLLocationManagerDelegate {
                 finalOptions.append(library)
             }
         }
+        if (finalOptions.count == 0) {
+            return;
+        }
         //Then scale the distances to 10
         let max: Double = findmax()
         let scalingFactor = 10/max
