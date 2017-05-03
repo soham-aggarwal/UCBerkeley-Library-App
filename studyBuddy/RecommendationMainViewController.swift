@@ -73,12 +73,12 @@ class RecommendationMainViewController: UIViewController, UITableViewDataSource,
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "recommendationToInfo" {
             if let destinationVC = segue.destination as? LibraryInfoViewController {
-                let selectedLibrary = libModel!.bestThree[selectedIndexPath!.item]
-                destinationVC.nameLabel.text = selectedLibrary.name!
-                destinationVC.descriptionLabel.text = selectedLibrary.description!
-                if let url = NSURL(string: selectedLibrary.image_url!) {
+                let selectedLibrary = libModel?.bestThree[selectedIndexPath!.item]
+                destinationVC.nameString = (selectedLibrary?.name!)!
+                destinationVC.descriptionString = (selectedLibrary?.description!)!
+                if let url = NSURL(string: (selectedLibrary?.image_url!)!) {
                     if let data = NSData(contentsOf: url as URL) {
-                        destinationVC.libraryImage.image = UIImage(data: data as Data)
+                        destinationVC.imageSave = UIImage(data: data as Data)
                     }
                 }
             }

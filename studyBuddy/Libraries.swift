@@ -27,11 +27,13 @@ class LibrariesModel: NSObject, CLLocationManagerDelegate {
         var totalScore: Int?
         
         
-        init(name:String, index: Int, description: String, image_url: String) {
+        init(name:String, index: Int, description: String, image_url: String, latitude: String, longitude:String) {
             self.name = name
             self.index = index
             self.description = description
             self.image_url = image_url
+            self.latitude = latitude
+            self.longitude = longitude
         }
     }
     
@@ -63,11 +65,15 @@ class LibrariesModel: NSObject, CLLocationManagerDelegate {
                     let indexPath: [JSONSubscriptType] = [i, "index"]
                     let descriptionPath: [JSONSubscriptType] = [i, "description"]
                     let imagePath: [JSONSubscriptType] = [i, "image_url"]
+                    let latPath: [JSONSubscriptType] = [i, "latitude"]
+                    let lonPath: [JSONSubscriptType] = [i, "longitude"]
                     let libraryOptionName = Library(
                         name: json[namePath].stringValue,
                         index: json[indexPath].intValue,
                         description: json[descriptionPath].stringValue,
-                        image_url: json[imagePath].stringValue
+                        image_url: json[imagePath].stringValue,
+                        latitude: json[latPath].stringValue,
+                        longitude: json[lonPath].stringValue
                     )
                     self.allLibraryOptions.append(libraryOptionName)
                 }
@@ -118,12 +124,8 @@ class LibrariesModel: NSObject, CLLocationManagerDelegate {
                     let library: Library = self.allLibraryOptions[i]
                     let openPath: [JSONSubscriptType] = [library.index!, "is_open"]
                     let percentagePath: [JSONSubscriptType] = [library.index!, "current_percent"]
-                    let latitudePath: [JSONSubscriptType] = [library.index!, "lat"]
-                    let longitudePath: [JSONSubscriptType] = [library.index!, "lon"]
                     self.allLibraryOptions[i].open = json[openPath].boolValue
                     self.allLibraryOptions[i].percentageFull = json[percentagePath].intValue
-                    self.allLibraryOptions[i].latitude = json[latitudePath].stringValue
-                    self.allLibraryOptions[i].longitude = json[longitudePath].stringValue
                 }
                 self.getDistances()
             case .failure(let error):
@@ -175,30 +177,36 @@ class LibrariesModel: NSObject, CLLocationManagerDelegate {
             let library = finalOptions[i]
             finalOptions[i].totalScore = Int(library.distance!) +  library.preference!
         }
-        bestThree.append(finalOptions[0])
+        var index: Int = 0;
         var min: Int = 25
-        for library in finalOptions {
+        for i in 0..<finalOptions.count {
+            let library: Library = finalOptions[i]
             if (library.totalScore! < min) {
                 min = library.totalScore!
-                bestThree[0] = library
+                index = i;
             }
         }
-        bestThree.append(finalOptions[0])
+        bestThree.append(finalOptions[index])
+        index = 0;
         min = 25
-        for library in finalOptions {
+        for i in 0..<finalOptions.count {
+            let library: Library = finalOptions[i]
             if (library.totalScore! < min && library.totalScore! > bestThree[0].totalScore!) {
                 min = library.totalScore!
-                bestThree[1] = library
+                index = i;
             }
         }
-        bestThree.append(finalOptions[0])
+        bestThree.append(finalOptions[index])
+        index = 0;
         min = 25
-        for library in finalOptions {
-            if (library.totalScore! < min && library.totalScore! > bestThree[0].totalScore! && library.totalScore! > bestThree[1].totalScore!) {
+        for i in 0..<finalOptions.count {
+            let library: Library = finalOptions[i]
+            if ((library.totalScore! < min) && (library.totalScore! > bestThree[0].totalScore!) && (library.totalScore! > bestThree[1].totalScore!)) {
                 min = library.totalScore!
-                bestThree[2] = library
+                index = i;
             }
         }
+        bestThree.append(finalOptions[index])
         table?.reloadData()
     }
     

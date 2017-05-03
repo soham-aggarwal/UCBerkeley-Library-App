@@ -16,7 +16,6 @@
 		B22562AA1EB5DE0E0029CAE9 /* Libraries.swift in Sources */ = {isa = PBXBuildFile; fileRef = B22562A91EB5DE0E0029CAE9 /* Libraries.swift */; };
 		B22562AC1EB5DE3D0029CAE9 /* TrendCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B22562AB1EB5DE3D0029CAE9 /* TrendCollectionViewCell.swift */; };
 		B22562AE1EB5DE5A0029CAE9 /* RecommendationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B22562AD1EB5DE5A0029CAE9 /* RecommendationTableViewCell.swift */; };
-		B22562B21EB6AD590029CAE9 /* LibraryInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B22562B11EB6AD590029CAE9 /* LibraryInfoViewController.swift */; };
 		B22562B41EB88E3D0029CAE9 /* KeychainService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B22562B31EB88E3D0029CAE9 /* KeychainService.swift */; };
 		B252490E1EB8DB60000AECB7 /* PreferencesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B252490D1EB8DB60000AECB7 /* PreferencesViewController.swift */; };
 		B25249101EB8DC77000AECB7 /* GlobalVar.swift in Sources */ = {isa = PBXBuildFile; fileRef = B252490F1EB8DC77000AECB7 /* GlobalVar.swift */; };
@@ -27,6 +26,7 @@
 		B299001E1EA064A300321B29 /* studyBuddyUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B299001D1EA064A300321B29 /* studyBuddyUITests.swift */; };
 		B299002D1EA0677500321B29 /* Users.swift in Sources */ = {isa = PBXBuildFile; fileRef = B299002C1EA0677500321B29 /* Users.swift */; };
 		B299FFFE1EA064A300321B29 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B299FFFD1EA064A300321B29 /* AppDelegate.swift */; };
+		B2B00DDD1EB99D4D003D6BA1 /* LibraryInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2B00DDC1EB99D4D003D6BA1 /* LibraryInfoViewController.swift */; };
 		B5F86E8029AEC94418379369 /* Pods_studyBuddyTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C8CB05CA585F7C8DB319D8DF /* Pods_studyBuddyTests.framework */; };
 		C9AC7E18F77F45A2A501F7AD /* Pods_studyBuddyUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0BDA81A61615C79DC3CD4234 /* Pods_studyBuddyUITests.framework */; };
 /* End PBXBuildFile section */
@@ -63,7 +63,6 @@
 		B22562A91EB5DE0E0029CAE9 /* Libraries.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Libraries.swift; sourceTree = "<group>"; };
 		B22562AB1EB5DE3D0029CAE9 /* TrendCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrendCollectionViewCell.swift; sourceTree = "<group>"; };
 		B22562AD1EB5DE5A0029CAE9 /* RecommendationTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecommendationTableViewCell.swift; sourceTree = "<group>"; };
-		B22562B11EB6AD590029CAE9 /* LibraryInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LibraryInfoViewController.swift; sourceTree = "<group>"; };
 		B22562B31EB88E3D0029CAE9 /* KeychainService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeychainService.swift; sourceTree = "<group>"; };
 		B252490D1EB8DB60000AECB7 /* PreferencesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreferencesViewController.swift; sourceTree = "<group>"; };
 		B252490F1EB8DC77000AECB7 /* GlobalVar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GlobalVar.swift; sourceTree = "<group>"; };
@@ -80,6 +79,7 @@
 		B299002C1EA0677500321B29 /* Users.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Users.swift; sourceTree = "<group>"; };
 		B299FFFA1EA064A300321B29 /* studyBuddy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = studyBuddy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B299FFFD1EA064A300321B29 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		B2B00DDC1EB99D4D003D6BA1 /* LibraryInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LibraryInfoViewController.swift; sourceTree = "<group>"; };
 		C63BE99455E85BE70930B3D9 /* Pods-studyBuddyUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-studyBuddyUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-studyBuddyUITests/Pods-studyBuddyUITests.release.xcconfig"; sourceTree = "<group>"; };
 		C8CB05CA585F7C8DB319D8DF /* Pods_studyBuddyTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_studyBuddyTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E5582A3900F31EBEEEB60CFD /* Pods-studyBuddyUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-studyBuddyUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-studyBuddyUITests/Pods-studyBuddyUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -141,7 +141,7 @@
 			children = (
 				B225629B1EB5DCE00029CAE9 /* RecommendationMainViewController.swift */,
 				B22562AD1EB5DE5A0029CAE9 /* RecommendationTableViewCell.swift */,
-				B22562B11EB6AD590029CAE9 /* LibraryInfoViewController.swift */,
+				B2B00DDC1EB99D4D003D6BA1 /* LibraryInfoViewController.swift */,
 			);
 			name = Recommendation;
 			sourceTree = "<group>";
@@ -535,9 +535,9 @@
 				B22562A21EB5DD600029CAE9 /* SignupViewController.swift in Sources */,
 				B22562AC1EB5DE3D0029CAE9 /* TrendCollectionViewCell.swift in Sources */,
 				B299002D1EA0677500321B29 /* Users.swift in Sources */,
+				B2B00DDD1EB99D4D003D6BA1 /* LibraryInfoViewController.swift in Sources */,
 				B25249101EB8DC77000AECB7 /* GlobalVar.swift in Sources */,
 				B22562A41EB5DD800029CAE9 /* TrendsMainViewController.swift in Sources */,
-				B22562B21EB6AD590029CAE9 /* LibraryInfoViewController.swift in Sources */,
 				B22562B41EB88E3D0029CAE9 /* KeychainService.swift in Sources */,
 				B225629C1EB5DCE00029CAE9 /* RecommendationMainViewController.swift in Sources */,
 				B252490E1EB8DB60000AECB7 /* PreferencesViewController.swift in Sources */,
