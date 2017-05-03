@@ -40,28 +40,29 @@ class LibrariesModel: NSObject {
     /* Make the API call to my API to get the names inside the initializer. Then inside the completion handler, call my API to getPreferences(). Then, inside the completion handler, make a function call to getDistance(). Inside the completion handler for getDistance(), make a function call to getPercentage(). Now all the information has been obtained and I can safely perform my algorithm.
      */
     
-    override init() {
-        let headers: HTTPHeaders = ["x-access-token": KeychainService.loadPassword() as! String]
-        Alamofire.request("https://library-adhyyan.herokuapp.com/api/libraries", method: .get, headers: headers).validate().responseJSON { response in
-            switch response.result {
-            case .success(let value):
-                let json = JSON(value)
-                let number = json.arrayValue.count
-                for i in 0...number {
-                    let namePath: [JSONSubscriptType] = [i, "name"]
-                    let indexPath: [JSONSubscriptType] = [i, "index"]
-                    let libraryOptionName = Library(
-                        name: json[namePath].stringValue,
-                        index: json[indexPath].intValue
-                    )
-                    self.allLibraryOptions.append(libraryOptionName)
-                }
-                self.getPreferences()
-            case .failure(let error):
-                print(error)
-            }
-        }
-    }
+//    override init() {
+//        let headers: HTTPHeaders = ["x-access-token": KeychainService.loadPassword() as! String]
+//        Alamofire.request("https://library-adhyyan.herokuapp.com/api/libraries", method: .get, headers: headers).validate().responseJSON {
+//            response in
+//            switch response.result {
+//            case .success(let value):
+//                let json = JSON(value)
+//                let number = json.arrayValue.count
+//                for i in 0...number {
+//                    let namePath: [JSONSubscriptType] = [i, "name"]
+//                    let indexPath: [JSONSubscriptType] = [i, "index"]
+//                    let libraryOptionName = Library(
+//                        name: json[namePath].stringValue,
+//                        index: json[indexPath].intValue
+//                    )
+//                    self.allLibraryOptions.append(libraryOptionName)
+//                }
+//                self.getPreferences()
+//            case .failure(let error):
+//                print(error)
+//            }
+//        }
+//    }
     
     func getPreferences() -> Void {
         let reqUrl: String = "https://library-adhyyan.herokuapp.com/api/users/" + GlobalVar.id
@@ -127,12 +128,12 @@ class LibrariesModel: NSObject {
             }
             alertController.addAction(openAction)
             let cancelAction = UIAlertAction(title: "Cancel",
-                                             style: .ctancel,
+                                             style: .cancel,
                                              handler: nil)
             alertController.addAction(cancelAction)
-            self.present(alertController,
-                         animated: true,
-                         completion: nil)
+//            self.present(alertController,
+//                         animated: true,
+//                         completion: nil)
         } else {
             for i in 0..<self.allLibraryOptions.count {
                 let mylocation = manager.location
@@ -155,7 +156,7 @@ class LibrariesModel: NSObject {
         
     }
     
-    func recommendThree() -> [Library] {
+    func recommendThree() -> Void {
         //first iterate through all and eliminate all those which are not open or have <20% open seats.
         var finalOptions : [Library] = []
         for library in allLibraryOptions {
@@ -198,6 +199,7 @@ class LibrariesModel: NSObject {
                 bestThree[0] = library
             }
         }
+        
 }
     
     

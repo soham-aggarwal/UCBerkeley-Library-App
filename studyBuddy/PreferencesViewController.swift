@@ -46,7 +46,7 @@ class PreferencesViewController: UIViewController {
             "username": username,
             "password": password,
             "preferences": [
-                "moffitt": music.text ?? "",
+                "music": music.text ?? "",
                 "doe": doe.text ?? "",
                 "kresge": kresge.text ?? "",
                 "eshleman": eshleman.text ?? "",
@@ -65,7 +65,7 @@ class PreferencesViewController: UIViewController {
                     let required = json[path].boolValue
                     if (json[path].boolValue){
                         print("Hello")
-                        self.performSegue(withIdentifier: "toPreferences", sender: self)
+                        self.performSegue(withIdentifier: "reSign", sender: self)
                     }else{
                         let displayMessage = json["message"].stringValue
                         let notificationAlert = UIAlertController(title: "Sign Up Error!", message: displayMessage as! String?, preferredStyle: UIAlertControllerStyle.alert)
@@ -77,8 +77,6 @@ class PreferencesViewController: UIViewController {
                     
                 }
         }
-            self.performSegue(withIdentifier:"toRecommendation", sender: self)
-    
     }
     
     
