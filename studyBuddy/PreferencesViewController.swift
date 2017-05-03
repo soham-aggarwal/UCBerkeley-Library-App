@@ -46,20 +46,22 @@ class PreferencesViewController: UIViewController {
             "username": username,
             "password": password,
             "preferences": [
-                "music": music.text ?? "",
-                "doe": doe.text ?? "",
-                "kresge": kresge.text ?? "",
-                "eshleman": eshleman.text ?? "",
-                "environmental library" : environmental.text ?? "",
-                "mlkb": mlkb.text ?? "",
-                "mlku": mlku.text ?? ""
+                "EngineeringLibrary": kresge.text ?? "",
+                "EshlemanGroundFloor": eshleman.text ?? "",
+                "EnvironmentalDesignLibrary" : environmental.text ?? "",
+                "MusicLibrary": music.text ?? "",
+                "MLKLowerStudyArea": mlkb.text ?? "",
+                "MLKUpperStudyArea": mlku.text ?? "",
+                "DoeNorthReadingRoom": doe.text ?? ""
             ]
         ]
-        let headers: HTTPHeaders = ["x-access-token": KeychainService.loadPassword() as! String]
-        Alamofire.request("https://library-adhyyan.herokuapp.com/api/users", method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers)
+        //let headers: HTTPHeaders = ["x-access-token": KeychainService.loadPassword() as! String]
+        Alamofire.request("https://library-adhyyan.herokuapp.com/api/users", method: .post, parameters: parameters, encoding: JSONEncoding.default)
             .responseJSON {response in
                 switch response.result {
                 case .success(let value):
+                    
+                    print(response.result.value)
                     let json = JSON(value)
                     let path: JSONSubscriptType = "success"
                     let required = json[path].boolValue
@@ -73,6 +75,8 @@ class PreferencesViewController: UIViewController {
                         self.present(notificationAlert, animated: true, completion: nil)
                     }
                 case .failure(let error):
+                    print("This is response")
+                    print(response.result.value)
                     print(error)
                     
                 }
