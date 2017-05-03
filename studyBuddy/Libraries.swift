@@ -41,7 +41,8 @@ class LibrariesModel: NSObject {
      */
     
     override init() {
-        Alamofire.request("https://library-adhyyan.herokuapp.com/api/libraries", method: .get).validate().responseJSON { response in
+        let headers: HTTPHeaders = ["x-access-token": KeychainService.loadPassword() as! String]
+        Alamofire.request("https://library-adhyyan.herokuapp.com/api/libraries", method: .get, headers: headers).validate().responseJSON { response in
             switch response.result {
             case .success(let value):
                 let json = JSON(value)
@@ -64,7 +65,8 @@ class LibrariesModel: NSObject {
     
     func getPreferences() -> Void {
         let reqUrl: String = "https://library-adhyyan.herokuapp.com/api/users/" + GlobalVar.id
-        Alamofire.request(reqUrl, method: .get).validate().responseJSON { response in
+        let headers: HTTPHeaders = ["x-access-token": KeychainService.loadPassword() as! String]
+        Alamofire.request(reqUrl, method: .get, headers: headers).validate().responseJSON { response in
             switch response.result {
             case .success(let value):
                 let json = JSON(value)
@@ -73,7 +75,7 @@ class LibrariesModel: NSObject {
                     let path: [JSONSubscriptType] = ["preferences", self.allLibraryOptions[i].name!]
                     let prefNumber = json[path].intValue
                     self.allLibraryOptions[i].preference = prefNumber
-                    self.getDistances(i: 0)
+                    self.getDistances()
                 }
                 self.getPreferences()
             case .failure(let error):
@@ -85,7 +87,8 @@ class LibrariesModel: NSObject {
 
     
     func getOpenAndPercentage(){
-        Alamofire.request("https://api.packd.org/locations/", method: .get).validate().responseJSON { response in
+        let headers: HTTPHeaders = ["x-access-token": KeychainService.loadPassword() as! String]
+        Alamofire.request("https://api.packd.org/locations/", method: .get, headers: headers).validate().responseJSON { response in
             switch response.result {
             case .success(let value):
                 let json = JSON(value)

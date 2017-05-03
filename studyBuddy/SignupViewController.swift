@@ -42,33 +42,25 @@ class SignupViewController: UIViewController {
     @IBOutlet weak var password: UITextField!
     
     @IBAction func signUpButton(_ sender: Any) {
-        let parameters: [String: Any] = [
-            "email": name.text ?? "null",
-            "username": username.text ?? "null",
-            "password": password.text ?? "null"
-        ]
-        Alamofire.request("https://library-adhyyan.herokuapp.com/api/users", method: .post, parameters: parameters, encoding: JSONEncoding.default)
-            .responseJSON {response in
-                switch response.result {
-                case .success(let value):
-                    let json = JSON(value)
-                    let path: JSONSubscriptType = "success"
-                    let required = json[path].boolValue
-                    if (json[path].boolValue){
-                        print("Hello")
-                        self.performSegue(withIdentifier: "toPreferences", sender: self)
-                    }else{
-                        let displayMessage = json["message"].stringValue
-                        let notificationAlert = UIAlertController(title: "Sign Up Error!", message: displayMessage as! String?, preferredStyle: UIAlertControllerStyle.alert)
-                        notificationAlert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.cancel, handler: nil))
-                        self.present(notificationAlert, animated: true, completion: nil)
+        self.performSegue(withIdentifier: "reSignIn", sender: self)
+
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let identifier = segue.identifier{
+            if (identifier == "reSignIn"){
+                if let destination = segue.destination as? PreferencesViewController{
+                    destination.email = name.text!
+                    destination.username = username.text!
+                    destination.password = password.text!
+                } else if (identifier == "toSignIn"){
+                    if let destination = segue.destination as? LoginViewController{
+                        //Does nothing really
                     }
-                case .failure(let error):
-                    print(error)
-                    
                 }
+            }
         }
-}
+    }
     
 }
 

@@ -18,7 +18,8 @@ class User {
     
     func getLibrarySize() -> JSON {
         DispatchQueue.main.sync {
-            Alamofire.request("https://library-adhyyan.herokuapp.com/api/libraries", method: .get).validate().responseJSON { response in
+            let headers: HTTPHeaders = ["x-access-token": KeychainService.loadPassword() as! String]
+            Alamofire.request("https://library-adhyyan.herokuapp.com/api/libraries", method: .get, headers: headers).validate().responseJSON { response in
                 switch response.result {
                 case .success(let value):
                     self.json = JSON(value)

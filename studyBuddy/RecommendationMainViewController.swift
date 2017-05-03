@@ -22,7 +22,8 @@ class RecommendationMainViewController: UIViewController, UITableViewDataSource,
         super.viewDidLoad()
         LibraryTableView.dataSource = self;
         LibraryTableView.delegate = self;
-        Alamofire.request("https://library-adhyyan.herokuapp.com/api/libraries", method: .get).validate().responseJSON { response in
+        let headers: HTTPHeaders = ["x-access-token": KeychainService.loadPassword() as! String]
+        Alamofire.request("https://library-adhyyan.herokuapp.com/api/libraries", method: .get, headers: headers).validate().responseJSON { response in
             switch response.result {
             case .success(let value):
                 let json = JSON(value)
@@ -63,7 +64,8 @@ class RecommendationMainViewController: UIViewController, UITableViewDataSource,
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "recommendationToInfo" {
             if let destinationVC = segue.destination as? LibraryInfoViewController {
-                Alamofire.request("https://library-adhyyan.herokuapp.com/api/libraries", method: .get).validate().responseJSON { response in
+                let headers: HTTPHeaders = ["x-access-token": KeychainService.loadPassword() as! String]
+                Alamofire.request("https://library-adhyyan.herokuapp.com/api/libraries", method: .get, headers: headers).validate().responseJSON { response in
                     switch response.result {
                     case .success(let value):
                         let json = JSON(value)

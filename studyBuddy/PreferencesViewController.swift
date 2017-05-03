@@ -8,6 +8,8 @@
 import UIKit
 import Foundation
 import Alamofire
+import SwiftyJSON
+
 
 class PreferencesViewController: UIViewController {
     
@@ -20,7 +22,11 @@ class PreferencesViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    @IBOutlet weak var moffitt: UITextField!
+    
+    var email = ""
+    var username = ""
+    var password = ""
+    @IBOutlet weak var music: UITextField!
     
     @IBOutlet weak var doe: UITextField!
     
@@ -36,20 +42,40 @@ class PreferencesViewController: UIViewController {
     
     @IBAction func finishSigningUp(_ sender: Any) {
         let parameters: [String:Any] = [
-            "moffitt": moffitt.text ?? "",
-            "doe": doe.text ?? "",
-            "kresge": kresge.text ?? "",
-            "eshleman": eshleman.text ?? "",
-            "environmental library" : environmental.text ?? "",
-            "mlkb": mlkb.text ?? "",
-            "mlku": mlku.text ?? ""
+            "email": email,
+            "username": username,
+            "password": password,
+            "preferences": [
+                "moffitt": music.text ?? "",
+                "doe": doe.text ?? "",
+                "kresge": kresge.text ?? "",
+                "eshleman": eshleman.text ?? "",
+                "environmental library" : environmental.text ?? "",
+                "mlkb": mlkb.text ?? "",
+                "mlku": mlku.text ?? ""
+            ]
         ]
-        
-        Alamofire.request("https://library-adhyyan.herokuapp.com/api/users", method: .put, parameters: ["preferences": parameters], encoding: JSONEncoding.default, headers: nil)
-            .responseJSON { response in
-                print(response.request as Any)  // original URL request
-                print(response.response as Any) // URL response
-                print(response.result.value as Any)   // result of response serialization
+        let headers: HTTPHeaders = ["x-access-token": KeychainService.loadPassword() as! String]
+        Alamofire.request("https://library-adhyyan.herokuapp.com/api/users", method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers)
+            .responseJSON {response in
+                switch response.result {
+                case .success(let value):
+                    let json = JSON(value)
+                    let path: JSONSubscriptType = "success"
+                    let required = json[path].boolValue
+                    if (json[path].boolValue){
+                        print("Hello")
+                        self.performSegue(withIdentifier: "toPreferences", sender: self)
+                    }else{
+                        let displayMessage = json["message"].stringValue
+                        let notificationAlert = UIAlertController(title: "Sign Up Error!", message: displayMessage as! String?, preferredStyle: UIAlertControllerStyle.alert)
+                        notificationAlert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.cancel, handler: nil))
+                        self.present(notificationAlert, animated: true, completion: nil)
+                    }
+                case .failure(let error):
+                    print(error)
+                    
+                }
         }
             self.performSegue(withIdentifier:"toRecommendation", sender: self)
     
