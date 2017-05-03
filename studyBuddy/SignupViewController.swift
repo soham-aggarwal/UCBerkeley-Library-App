@@ -42,13 +42,13 @@ class SignupViewController: UIViewController {
     @IBOutlet weak var password: UITextField!
     
     @IBAction func signUpButton(_ sender: Any) {
-        self.performSegue(withIdentifier: "reSignIn", sender: self)
+        self.performSegue(withIdentifier: "toPreferences", sender: self)
 
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let identifier = segue.identifier{
-            if (identifier == "reSignIn"){
+            if (identifier == "toPreferences"){
                 if let destination = segue.destination as? PreferencesViewController{
                     destination.email = name.text!
                     destination.username = username.text!

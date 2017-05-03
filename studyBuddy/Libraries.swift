@@ -10,11 +10,14 @@ import Alamofire
 import SwiftyJSON
 import CoreLocation
 
-class LibrariesModel: NSObject {
+class LibrariesModel: NSObject, CLLocationManagerDelegate {
     
+
     struct Library {
         var name: String?
         var index: Int?
+        var description: String?
+        var image_url: String?
         var preference: Int?
         var open: Bool?
         var latitude: String?
@@ -24,16 +27,19 @@ class LibrariesModel: NSObject {
         var totalScore: Int?
         
         
-        init(name:String, index: Int) {
+        init(name:String, index: Int, description: String, image_url: String) {
             self.name = name
             self.index = index
+            self.description = description
+            self.image_url = image_url
         }
     }
     
     var allLibraryOptions: [Library] = []
     var bestThree: [Library] = []
     let manager = CLLocationManager()
-
+    var table: UITableView?
+    var mylocation: CLLocation?
     
     //Now we need to fill up the allLibraryOptions variable.
     
@@ -41,18 +47,27 @@ class LibrariesModel: NSObject {
      */
     
     override init() {
-        let headers: HTTPHeaders = ["x-access-token": KeychainService.loadPassword() as! String]
+        super.init()
+        //self.table = tableview
+        manager.delegate = self
+        manager.desiredAccuracy = kCLLocationAccuracyBest
+        manager.requestLocation()
+        let headers: HTTPHeaders = ["x-access-token":KeychainService.loadPassword() as! String]
         Alamofire.request("https://library-adhyyan.herokuapp.com/api/libraries", method: .get, headers: headers).validate().responseJSON { response in
             switch response.result {
             case .success(let value):
                 let json = JSON(value)
                 let number = json.arrayValue.count
-                for i in 0...number {
+                for i in 0..<number {
                     let namePath: [JSONSubscriptType] = [i, "name"]
                     let indexPath: [JSONSubscriptType] = [i, "index"]
+                    let descriptionPath: [JSONSubscriptType] = [i, "description"]
+                    let imagePath: [JSONSubscriptType] = [i, "image_url"]
                     let libraryOptionName = Library(
                         name: json[namePath].stringValue,
-                        index: json[indexPath].intValue
+                        index: json[indexPath].intValue,
+                        description: json[descriptionPath].stringValue,
+                        image_url: json[imagePath].stringValue
                     )
                     self.allLibraryOptions.append(libraryOptionName)
                 }
@@ -63,31 +78,38 @@ class LibrariesModel: NSObject {
         }
     }
     
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        mylocation = locations[locations.count - 1]
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        print(error)
+    }
+    
     func getPreferences() -> Void {
         let reqUrl: String = "https://library-adhyyan.herokuapp.com/api/users/" + GlobalVar.id
-        let headers: HTTPHeaders = ["x-access-token": KeychainService.loadPassword() as! String]
+        let headers: HTTPHeaders = ["x-access-token":KeychainService.loadPassword() as! String]
+        print(GlobalVar.id)
         Alamofire.request(reqUrl, method: .get, headers: headers).validate().responseJSON { response in
             switch response.result {
             case .success(let value):
                 let json = JSON(value)
-                let number = json.arrayValue.count
-                for i in 0...number {
+                for i in 0..<self.allLibraryOptions.count {
                     let path: [JSONSubscriptType] = ["preferences", self.allLibraryOptions[i].name!]
-                    let prefNumber = json[path].intValue
-                    self.allLibraryOptions[i].preference = prefNumber
-                    self.getDistances()
+                    let prefNumber = json[path].stringValue
+                    self.allLibraryOptions[i].preference = Int(prefNumber)
                 }
-                self.getPreferences()
+                self.getOpenAndPercentage()
             case .failure(let error):
                 print(error)
             }
         }
     }
     
-
+    
     
     func getOpenAndPercentage(){
-        let headers: HTTPHeaders = ["x-access-token": KeychainService.loadPassword() as! String]
+        let headers: HTTPHeaders = ["Authorization": "Token 4bbaf1d70e38e88de1b3b70debec71b5e422791e"]
         Alamofire.request("https://api.packd.org/locations/", method: .get, headers: headers).validate().responseJSON { response in
             switch response.result {
             case .success(let value):
@@ -97,11 +119,11 @@ class LibrariesModel: NSObject {
                     let openPath: [JSONSubscriptType] = [library.index!, "is_open"]
                     let percentagePath: [JSONSubscriptType] = [library.index!, "current_percent"]
                     let latitudePath: [JSONSubscriptType] = [library.index!, "lat"]
-                    let longituePath: [JSONSubscriptType] = [library.index!, "lon"]
+                    let longitudePath: [JSONSubscriptType] = [library.index!, "lon"]
                     self.allLibraryOptions[i].open = json[openPath].boolValue
                     self.allLibraryOptions[i].percentageFull = json[percentagePath].intValue
-                    self.allLibraryOptions[i].latitude = json[openPath].stringValue
-                    self.allLibraryOptions[i].longitude = json[percentagePath].stringValue
+                    self.allLibraryOptions[i].latitude = json[latitudePath].stringValue
+                    self.allLibraryOptions[i].longitude = json[longitudePath].stringValue
                 }
                 self.getDistances()
             case .failure(let error):
@@ -109,53 +131,31 @@ class LibrariesModel: NSObject {
             }
         }
     }
-
+    
     func getDistances() -> Void {
         //manager.delegate = self.manager
-        if (!CLLocationManager.locationServicesEnabled()) {
-            let alertController = UIAlertController(
-                title: "Background Location Access Disabled",
-                message: "In order to ____, please open Settings and set location access for this app to When in Use",
-                preferredStyle: .alert)
-            let openAction = UIAlertAction(title: "Open Settings",
-                                           style: .default) { (action) in
-                                            if let url = NSURL(string: UIApplicationOpenSettingsURLString) {
-                                                UIApplication.shared.open(url as URL,
-                                                                          options: [:],
-                                                                          completionHandler: nil)
-                                            }
+        for i in 0..<self.allLibraryOptions.count {
+            mylocation = manager.location
+            //locationManager(manager, didUpdateLocations: mylocation)
+            let libLat = allLibraryOptions[i].latitude //Get value of lat
+            let libLon = allLibraryOptions[i].longitude  //Get value of lon
+            var dLati = 0.0
+            var dLong = 0.0
+            if let lat = libLat {
+                dLati = (lat as NSString).doubleValue
             }
-            alertController.addAction(openAction)
-            let cancelAction = UIAlertAction(title: "Cancel",
-                                             style: .ctancel,
-                                             handler: nil)
-            alertController.addAction(cancelAction)
-            self.present(alertController,
-                         animated: true,
-                         completion: nil)
-        } else {
-            for i in 0..<self.allLibraryOptions.count {
-                let mylocation = manager.location
-                let libLat = allLibraryOptions[i].latitude //Get value of lat
-                let libLon = allLibraryOptions[i].longitude  //Get value of lon
-                var dLati = 0.0
-                var dLong = 0.0
-                if let lat = libLat {
-                    dLati = (lat as NSString).doubleValue
-                }
-                if let lon = libLon{
-                    dLong = (lon as NSString).doubleValue
-                }
-                let libLocation = (CLLocation).init(latitude: dLati, longitude: dLong)
-                let distance = mylocation?.distance(from: libLocation)
-                allLibraryOptions[i].distance = distance
+            if let lon = libLon{
+                dLong = (lon as NSString).doubleValue
             }
-            
+            let libLocation = (CLLocation).init(latitude: dLati, longitude: dLong)
+            let distance = mylocation?.distance(from: libLocation)
+            allLibraryOptions[i].distance = distance
         }
-        
+        self.recommendThree()
     }
     
-    func recommendThree() -> [Library] {
+    
+    func recommendThree() {
         //first iterate through all and eliminate all those which are not open or have <20% open seats.
         var finalOptions : [Library] = []
         for library in allLibraryOptions {
@@ -171,8 +171,9 @@ class LibrariesModel: NSObject {
             finalOptions[i].distance = library.distance! * scalingFactor
         }
         //Then put values into totalscore based on these two rankings.
-        for var library in finalOptions {
-            library.totalScore = Int(library.distance!) +  library.preference!
+        for i in 0..<finalOptions.count {
+            let library = finalOptions[i]
+            finalOptions[i].totalScore = Int(library.distance!) +  library.preference!
         }
         bestThree.append(finalOptions[0])
         var min: Int = 25
@@ -187,7 +188,7 @@ class LibrariesModel: NSObject {
         for library in finalOptions {
             if (library.totalScore! < min && library.totalScore! > bestThree[0].totalScore!) {
                 min = library.totalScore!
-                bestThree[0] = library
+                bestThree[1] = library
             }
         }
         bestThree.append(finalOptions[0])
@@ -195,10 +196,11 @@ class LibrariesModel: NSObject {
         for library in finalOptions {
             if (library.totalScore! < min && library.totalScore! > bestThree[0].totalScore! && library.totalScore! > bestThree[1].totalScore!) {
                 min = library.totalScore!
-                bestThree[0] = library
+                bestThree[2] = library
             }
         }
-}
+        table?.reloadData()
+    }
     
     
     func findmax() -> Double {
@@ -211,5 +213,6 @@ class LibrariesModel: NSObject {
         return max
     }
 }
-    
+
+
 

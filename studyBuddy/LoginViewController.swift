@@ -38,15 +38,17 @@ class LoginViewController: UIViewController {
                 switch response.result {
 
                 case .success(let value):
+                    print(value)
                     let json = JSON(value)
                     let path: JSONSubscriptType = "success"
                     if (json[path].boolValue) {
                         let path: JSONSubscriptType = "token"
                         KeychainService.savePassword(token: json[path].stringValue as NSString)
-                        let idPath: [JSONSubscriptType] = ["user", "id"]
+                        let idPath: [JSONSubscriptType] = ["user", "_id"]
                         GlobalVar.id = json[idPath].stringValue
-                        let namePath: [JSONSubscriptType] = ["user", "name"]
+                        let namePath: [JSONSubscriptType] = ["user", "username"]
                         GlobalVar.username = json[namePath].stringValue
+                        print(GlobalVar.username + GlobalVar.id)
                         self.performSegue(withIdentifier: "confirmedSignIn", sender: self)
                     }else{
                         let displayMessage = json["message"].stringValue
